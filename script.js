@@ -1,18 +1,17 @@
-const toggleButton = document.getElementById('theme-toggle');
-const body = document.body;
+const form = document.getElementById('contact-form');
+const successMsg = document.getElementById('success-msg');
 
-// Load saved theme from localStorage
-window.onload = () => {
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  body.classList.add(savedTheme);
-};
+form.addEventListener('submit', (e) => {
+  e.preventDefault(); // Prevent page reload
 
-// Toggle between themes when clicked
-toggleButton.addEventListener('click', () => {
-  body.classList.toggle('dark');
-  body.classList.toggle('light');
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
 
-  // Save the user’s choice
-  const currentTheme = body.classList.contains('dark') ? 'dark' : 'light';
-  localStorage.setItem('theme', currentTheme);
+  if(name && email && message){
+    successMsg.style.display = 'block';
+    form.reset(); // Clear form fields
+  } else {
+    alert('Please fill all fields');
+  }
 });
