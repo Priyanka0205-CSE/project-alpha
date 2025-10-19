@@ -1,17 +1,13 @@
-const form = document.getElementById('contact-form');
-const successMsg = document.getElementById('success-msg');
+const searchBox = document.getElementById('search-box');
+const items = document.querySelectorAll('#items-list li');
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault(); // Prevent page reload
-
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
-
-  if(name && email && message){
-    successMsg.style.display = 'block';
-    form.reset(); // Clear form fields
-  } else {
-    alert('Please fill all fields');
-  }
+searchBox.addEventListener('input', () => {
+  const query = searchBox.value.toLowerCase();
+  items.forEach(item => {
+    if(item.textContent.toLowerCase().includes(query)){
+      item.style.display = '';
+    } else {
+      item.style.display = 'none';
+    }
+  });
 });
